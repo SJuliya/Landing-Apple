@@ -1,0 +1,21 @@
+.footer {
+    background-color: black;
+    color: #FFFFFF;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.footer__navigation {
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.footer__navigation .navigation-item {
+    padding-bottom: 20px;
+}
+
+.footer__copyright {
+    font-weight: 200;
+    font-size: 14px;
+    line-height: 17px;
+}

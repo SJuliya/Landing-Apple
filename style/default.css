@@ -44,7 +44,20 @@ h1, h2, h3, p {
 }
 
 .container {
-    max-width: 1230px;
+    max-width: 1324px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 15px;
 }
+
+@media (min-width: 768px) {
+    .container {
+        padding: 0 34px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 0 77px;
+    }
+}
+
