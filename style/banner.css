@@ -52,6 +52,7 @@
     .banner {
         padding: 120px 0 160px;
         background-image: url("../img/bg-lap.jpg");
+        margin-bottom: 70px;
     }
 
     .banner__content {
@@ -74,6 +75,25 @@
 
     .banner__btn {
         font-size: 16px;
+        transition-property: background-color, color;
+        transition-duration: 0.1s;
+        transition-timing-function: ease-in-out;
+    }
+
+    .banner__btn:hover,
+    .banner__btn:focus {
+        background-color: #FFFFFF;
+    }
+
+    .banner__btn:active {
+        background-color: #2238FF;
+        color: #FFFFFF;
+    }
+
+    .banner__btn:disabled {
+        background-color: #CCCCCC;
+        color: #FFFFFF;
+        border: none;
     }
 }
 

@@ -1,11 +1,25 @@
 .navigation__list {
     display: flex;
-    gap: 50px;
+    gap: 20px 50px;
+}
+
+.navigation__list_column-mob {
+    flex-direction: column;
+}
+
+.header .navigation__link:hover {
+    color: #2238FF;
+}
+
+@media (min-width: 560px) {
+    .navigation__list_column-mob {
+        flex-direction: row;
+    }
 }
 
 @media (min-width: 1024px) {
     .navigation__list {
         gap: 84px;
+        font-size: 20px;
     }
-
 }
