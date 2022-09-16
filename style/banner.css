@@ -33,6 +33,25 @@
     padding: 16px 20px;
     font-size: 14px;
     line-height: 100%;
+    transition-property: background-color, color;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+}
+
+.banner__btn:hover,
+.banner__btn:focus {
+    background-color: #FFFFFF;
+}
+
+.banner__btn:active {
+    background-color: #2238FF;
+    color: #FFFFFF;
+}
+
+.banner__btn:disabled {
+    background-color: #CCCCCC;
+    color: #FFFFFF;
+    border: none;
 }
 
 @media (min-width: 768px) {
@@ -75,25 +94,6 @@
 
     .banner__btn {
         font-size: 16px;
-        transition-property: background-color, color;
-        transition-duration: 0.1s;
-        transition-timing-function: ease-in-out;
-    }
-
-    .banner__btn:hover,
-    .banner__btn:focus {
-        background-color: #FFFFFF;
-    }
-
-    .banner__btn:active {
-        background-color: #2238FF;
-        color: #FFFFFF;
-    }
-
-    .banner__btn:disabled {
-        background-color: #CCCCCC;
-        color: #FFFFFF;
-        border: none;
     }
 }
 
