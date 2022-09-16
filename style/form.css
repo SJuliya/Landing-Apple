@@ -44,6 +44,25 @@
     width: 225px;
 }
 
+.form__submit:hover,
+.form__submit:focus {
+    color: black;
+    background-color: #FFFFFF;
+    border: 1px solid #2238FF;
+}
+
+.form__submit:active {
+    background-color: #8793FF;
+    color: #FFFFFF;
+    border: none;
+}
+
+.form__submit:disabled {
+    background-color: #CCCCCC;
+    color: #FFFFFF;
+    border: none;
+}
+
 @media (min-width: 1024px) {
     .form {
         flex-direction: row;

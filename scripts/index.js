@@ -90,7 +90,7 @@ const showPrice = (currency = 'USD') => {
 
 //api
 const myHeaders = new Headers();
-myHeaders.append("apikey", "dxCLel6AOx2sHjnjdBEoyYTx6irNVWle");
+myHeaders.append("apikey", "IQ6glz8eAnp6bpgk29jZNU08x7xoPH9W");
 
 const requestOptions = {
     method: 'GET',

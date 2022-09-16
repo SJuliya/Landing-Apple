@@ -52,6 +52,10 @@
     font-size: 14px;
 }
 
+.country__choice:hover {
+    color: #2238FF;
+}
+
 .country__track {
     z-index: 1;
     position: absolute;
