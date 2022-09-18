@@ -38,20 +38,25 @@ new Swiper('.goods__block', {
 
 //modal
 const productMore = document.querySelectorAll('.product__more');
-
 const modal = document.querySelector('.modal');
+
+const closeModal = (event) => {
+    if (event. type === 'keyup' && event.key === 'Escape' ||
+        event. type === 'click' && event.target === modal
+    ) {
+        modal.classList.remove('modal_open');
+        window.removeEventListener('keyup', closeModal);
+    }
+};
 
 productMore.forEach((btn) => {
     btn.addEventListener('click', () => {
         modal.classList.add('modal_open');
+        window.addEventListener('keyup', closeModal);
     })
 });
 
-modal.addEventListener('click', ({target}) => {
-    if (target === modal) {
-        modal.classList.remove('modal_open');
-    }
-});
+modal.addEventListener('click', closeModal);
 
 const formPlaceholder = document.querySelectorAll('.form__placeholder');
 const formInput = document.querySelectorAll('.form__input')
@@ -119,9 +124,101 @@ countryBtn.addEventListener('click', () => {
 
 countryWrapper.addEventListener('click', ({target}) => {
     if (target.classList.contains('country__choice')) {
+        countryBtn.textContent = target.dataset.currency;
         countryWrapper.classList.remove('country__wrapper_open');
         showPrice(target.dataset.currency);
     }
 });
+
+//timer
+const declOfNum = (n, titles) => titles[n % 10 === 1 && n % 100 !== 11 ?
+    0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
+
+const timer = (deadline) => {
+    const unitDay = document.querySelector('.timer__unit_day');
+    const unitHour = document.querySelector('.timer__unit_hour');
+    const unitMinute = document.querySelector('.timer__unit_minute');
+    const descriptionDay = document.querySelector('.timer__unit-description_day');
+    const descriptionHour = document.querySelector('.timer__unit-description_hour');
+    const descriptionMinute = document.querySelector('.timer__unit-description_minute');
+
+    const getTimeRemaining = () => {
+        const dateStop = new Date(deadline).getTime();
+        const dateNow = Date.now();
+        const timeRemaining = dateStop - dateNow;
+
+/*      const ms = timeRemaining;
+        const s = timeRemaining / 1000 % 60;*/
+        const minutes = Math.floor(timeRemaining / 1000 / 60 % 60);
+        const hours = Math.floor(timeRemaining / 1000 / 60 / 60 % 24);
+        const days = Math.floor(timeRemaining / 1000 / 60 / 60 / 24);
+
+        return {timeRemaining, minutes, hours, days};
+    }
+
+    const start = () => {
+        const timer = getTimeRemaining();
+
+        unitDay.textContent = timer.days;
+        unitHour.textContent = timer.hours;
+        unitMinute.textContent = timer.minutes;
+
+        descriptionDay.textContent = declOfNum(timer.days, ['день', 'дня', 'дней']);
+        descriptionHour.textContent = declOfNum(timer.hours, ['час', 'часа', 'часов']);
+        descriptionMinute.textContent = declOfNum(timer.minutes, ['минута', 'минуты', 'минут']);
+
+        const timerId = setTimeout(start, 60000);
+
+        if (timer.timeRemaining < 0) {
+            clearTimeout(timerId);
+            unitDay.textContent = '0';
+            unitHour.textContent = '0';
+            unitMinute.textContent = '0';
+        }
+    }
+    start();
+}
+
+timer('2023/09/17 20:00');
+
+//scroll
+const smoothScroll = (trigger) => {
+    const SPEED = 0.3;
+    const scrolled = e => {
+        e.preventDefault();
+        const target = e.target;
+
+        if (target.matches('[href^="#"]')) {
+            let start = 0;
+            const pageY = window.pageYOffset;
+            const hash = target.getAttribute('href');
+
+            if (hash === '#') return;
+
+            const elem = document.querySelector(hash);
+            const coordinateElem = elem.getBoundingClientRect().top;
+            const allDistance = pageY + coordinateElem;
+            const scroll = time => {
+                if (!start) start = time;
+                const progress = time - start;
+                const r = (coordinateElem < 0 ?
+                    Math.max(pageY - progress / SPEED, allDistance) :
+                    Math.min(pageY + progress / SPEED, allDistance));
+
+                window.scrollTo(0, r);
+
+                const scrolling = coordinateElem < 0 ?
+                    r > allDistance :
+                    r < allDistance;
+                if (scrolling) requestAnimationFrame(scroll);
+            }
+            requestAnimationFrame(scroll)
+        }
+    }
+    trigger.addEventListener('click', scrolled);
+}
+
+smoothScroll(document.querySelector('.header__navigation'));
+smoothScroll(document.querySelector('.footer__navigation'));
 
 
